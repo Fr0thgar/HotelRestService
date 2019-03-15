@@ -18,5 +18,10 @@ namespace HotelModel
         {
             
         }
+
+        public override string ToString()
+        {
+            return $"{Hotel_No}, {SwimmingPool}, {TableTennis}, {PoolTable}, {Bar}";
+        }
     }
 }

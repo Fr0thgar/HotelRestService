@@ -29,7 +29,7 @@ namespace HotelRestService.DBUtil
                 {
                     while (reader.Read())
                     {
-                        
+
                         Facilities facilities = new Facilities();
                         facilities.Hotel_No = reader.GetInt32(0);
                         facilities.SwimmingPool = reader.GetBoolean(1);
@@ -39,7 +39,7 @@ namespace HotelRestService.DBUtil
                         facilitiesList.Add(facilities);
                     }
                 }
-                finally 
+                finally
                 {
                     reader.Close();
                 }
@@ -66,13 +66,13 @@ namespace HotelRestService.DBUtil
                 {
 
                 }
-                finally 
+                finally
                 {
                     reader.Close();
                 }
 
                 return facilities;
-            }   
+            }
         }
 
         public bool CreateFacility(Facilities facilities)
@@ -81,7 +81,7 @@ namespace HotelRestService.DBUtil
 
             string queryString =
                 $"INSERT INTO Demofacilities (Hotel_No, SwimmingPool, TableTennis, PoolTable, Bar)" +
-                $"VALUES({facilities.Hotel_No}, {Convert.ToInt16(facilities.SwimmingPool)}, {Convert.ToInt16(facilities.TableTennis)}, {Convert.ToInt16(facilities.PoolTable)}, {Convert.ToInt16(facilities.Bar)}";
+                $"VALUES({facilities.Hotel_No}, {Convert.ToInt16(facilities.SwimmingPool)}, {Convert.ToInt16(facilities.TableTennis)}, {Convert.ToInt16(facilities.PoolTable)}, {Convert.ToInt16(facilities.Bar)})";
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
             {
@@ -91,7 +91,7 @@ namespace HotelRestService.DBUtil
                 {
                     command.ExecuteNonQuery();
                 }
-                finally 
+                finally
                 {
                     connection.Close();
                 }
@@ -102,8 +102,11 @@ namespace HotelRestService.DBUtil
 
         public bool UpdateFacilities(Facilities facilities, int Hotel_No)
         {
-            string queryString = $"UPDATE Demofacilities" +
-                                 $"SET SwimmingPool = {Convert.ToInt16(facilities.SwimmingPool)}, TableTennis = {Convert.ToInt16(facilities.TableTennis)}, PoolTable = {Convert.ToInt16(facilities.PoolTable)}, Bar = {Convert.ToInt16(facilities.Bar)}"+ 
+            string queryString = $"UPDATE DemoFacilities " +
+                                 $"SET SwimmingPool = {Convert.ToInt16(facilities.SwimmingPool)}, " +
+                                 $"TableTennis = {Convert.ToInt16(facilities.TableTennis)}, " +
+                                 $"PoolTable = {Convert.ToInt16(facilities.PoolTable)}, " +
+                                 $"Bar = {Convert.ToInt16(facilities.Bar)} " +
                                  $"WHERE Hotel_No = {Hotel_No}";
 
             using (SqlConnection connection =
@@ -115,7 +118,7 @@ namespace HotelRestService.DBUtil
                 {
                     command.ExecuteNonQuery();
                 }
-                finally 
+                finally
                 {
                     connection.Close();
                 }
